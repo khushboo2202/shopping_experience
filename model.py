@@ -20,6 +20,7 @@ st.write("Upload an image, refine the description, and generate a new image.")
 
 # Load the model once
 @st.cache_resource
+@st.cache_resource
 def load_diffusion_model():
     if torch.cuda.is_available():
         pipe = DiffusionPipeline.from_pretrained("stabilityai/stable-diffusion-2-1-base", torch_dtype=torch.float16)
@@ -28,6 +29,7 @@ def load_diffusion_model():
         pipe = DiffusionPipeline.from_pretrained("stabilityai/stable-diffusion-2-1-base")
     pipe.scheduler = EulerAncestralDiscreteScheduler.from_config(pipe.scheduler.config)
     return pipe
+
 
 pipe = load_diffusion_model()
 
